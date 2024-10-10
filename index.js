@@ -2,7 +2,6 @@ const express = require('express')
 const chalk = require('chalk')
 const path = require('path')
 const mongoose = require('mongoose')
-const Note = require('./models/note');
 const { addNote, getNotes, removeNote, updateNote } = require('./notes.controller')
 
 const port = 3000
