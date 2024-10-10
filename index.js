@@ -1,6 +1,8 @@
 const express = require('express')
 const chalk = require('chalk')
 const path = require('path')
+const mongoose = require('mongoose')
+const Note = require('./models/note');
 const { addNote, getNotes, removeNote, updateNote } = require('./notes.controller')
 
 const port = 3000
@@ -48,6 +50,13 @@ app.put('/:id', async (req, res) => {
 	})
 })
 
-app.listen(port, () => {
-	console.log(chalk.green(`Server has been started on port ${port}...`))
-})
+mongoose.connect(
+	'mongodb+srv://sovremennik4400:qwerty123@cluster0.ohkru.mongodb.net/notes?retryWrites=true&w=majority&appName=Cluster0'
+).then(async () => {
+	await Note.create({title: 'test note'});
+
+	app.listen(port, () => {
+		console.log(chalk.green(`Server has been started on port ${port}...`))
+	})
+});
+
