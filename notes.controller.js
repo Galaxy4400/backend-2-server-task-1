@@ -1,8 +1,8 @@
 const chalk = require('chalk')
 const Note = require('./models/note')
 
-const addNote = async (title) => {
-	await Note.create({title});
+const addNote = async (title, owner) => {
+	await Note.create({title, owner});
 
 	console.log(chalk.bgGreen('Note was added!'))
 }

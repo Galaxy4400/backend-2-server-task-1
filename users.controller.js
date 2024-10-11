@@ -2,8 +2,7 @@ const chalk = require('chalk');
 const bcrypt = require('bcrypt');
 const User = require('./models/user');
 const jwt = require('jsonwebtoken');
-
-const JWT_SECRET = 'test';
+const { JWT_SECRET } = require('./constants');
 
 const addUser = async (email, password) => {
 	const passwordHash = await bcrypt.hash(password, 10);

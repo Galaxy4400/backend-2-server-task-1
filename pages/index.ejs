@@ -49,6 +49,11 @@
 								</span>
 								<input class="d-none" value="<%= notes[i].title %>" type="text" name="title">
 							</div>
+							<div class="info-group d-flex justify-content-between align-items-center">
+								<span>
+									<%= notes[i].owner %>
+								</span>
+							</div>
 							<div class="actions-group d-flex justify-content-between align-items-center">
 								<div class="d-flex d-none" style="gap: 10px;" data-type="redact">
 									<button class="btn btn-success" data-type="save" data-id="<%= notes[i].id %>">Сохранить</button>
