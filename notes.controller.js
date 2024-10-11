@@ -13,14 +13,22 @@ const getNotes = async () => {
 	return notes;
 }
 
-const removeNote = async (id) => {
-	await Note.deleteOne({ _id: id });
+const removeNote = async (id, owner) => {
+	const result = await Note.deleteOne({ _id: id, owner });
+
+	if (!result.matchedCount) {
+		throw new Error('No note to delete');
+	}
 	
 	console.log(chalk.red(`Note with id="${id}" has been removed.`))
 }
 
-const updateNote = async ({ id, title }) => {
-	await Note.updateOne({ _id: id }, { title });
+const updateNote = async ({ id, title }, owner) => {
+	const result = await Note.updateOne({ _id: id, owner }, { title });
+
+	if (!result.matchedCount) {
+		throw new Error('No note to edit');
+	}
 
 	console.log(chalk.yellow(`Note with id="${id}" has been updated.`))
 }

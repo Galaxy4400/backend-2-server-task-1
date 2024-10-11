@@ -55,14 +55,16 @@
 								</span>
 							</div>
 							<div class="actions-group d-flex justify-content-between align-items-center">
-								<div class="d-flex d-none" style="gap: 10px;" data-type="redact">
-									<button class="btn btn-success" data-type="save" data-id="<%= notes[i].id %>">Сохранить</button>
-									<button class="btn btn-danger" data-type="abort" data-id="<%= notes[i].id %>">Отменить</button>
-								</div>
-								<div class="d-flex" style="gap: 10px;" data-type="actions">
-									<button class="btn btn-primary" data-type="update" data-id="<%= notes[i].id %>">Редактировать</button>
-									<button class="btn btn-danger" data-type="remove" data-id="<%= notes[i].id %>">&times;</button>
-								</div>
+								<% if (notes[i].owner === userEmail) { %>
+									<div class="d-flex d-none" style="gap: 10px;" data-type="redact">
+										<button class="btn btn-success" data-type="save" data-id="<%= notes[i].id %>">Сохранить</button>
+										<button class="btn btn-danger" data-type="abort" data-id="<%= notes[i].id %>">Отменить</button>
+									</div>
+									<div class="d-flex" style="gap: 10px;" data-type="actions">
+										<button class="btn btn-primary" data-type="update" data-id="<%= notes[i].id %>">Редактировать</button>
+										<button class="btn btn-danger" data-type="remove" data-id="<%= notes[i].id %>">&times;</button>
+									</div>
+								<% } %>
 							</div>
 						</li>
 					<% } %>

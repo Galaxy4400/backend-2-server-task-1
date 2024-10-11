@@ -75,6 +75,7 @@ app.get('/', async (req, res) => {
 	res.render('index', {
 		title: 'Express App',
 		notes: await getNotes(),
+		userEmail: req.user.email,
 		created: false,
 		error: false,
 	});
@@ -86,6 +87,7 @@ app.post('/', async (req, res) => {
 		res.render('index', {
 			title: 'Express App',
 			notes: await getNotes(),
+			userEmail: req.user.email,
 			created: true,
 			error: false,
 		});
@@ -101,23 +103,45 @@ app.post('/', async (req, res) => {
 });
 
 app.delete('/:id', async (req, res) => {
-	await removeNote(req.params.id);
-	res.render('index', {
-		title: 'Express App',
-		notes: await getNotes(),
-		created: false,
-		error: false,
-	});
+	try {
+		await removeNote(req.params.id, req.user.email);
+		res.render('index', {
+			title: 'Express App',
+			notes: await getNotes(),
+			userEmail: req.user.email,
+			created: false,
+			error: false,
+		});
+	} catch (error) {
+		res.render('index', {
+			title: 'Express App',
+			notes: await getNotes(),
+			userEmail: req.user.email,
+			created: false,
+			error: error.message,
+		});
+	}
 });
 
 app.put('/:id', async (req, res) => {
-	await updateNote({ id: req.params.id, title: req.body.title});
-	res.render('index', {
-		title: 'Express App',
-		notes: await getNotes(),
-		created: false,
-		error: false,
-	});
+	try {
+		await updateNote({ id: req.params.id, title: req.body.title}, req.user.email);
+		res.render('index', {
+			title: 'Express App',
+			notes: await getNotes(),
+			userEmail: req.user.email,
+			created: false,
+			error: false,
+		});
+	} catch (error) {
+		res.render('index', {
+			title: 'Express App',
+			notes: await getNotes(),
+			userEmail: req.user.email,
+			created: false,
+			error: error.message,
+		});
+	}
 });
 
 mongoose.connect(

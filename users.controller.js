@@ -4,6 +4,7 @@ const User = require('./models/user');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('./constants');
 
+
 const addUser = async (email, password) => {
 	const passwordHash = await bcrypt.hash(password, 10);
 
